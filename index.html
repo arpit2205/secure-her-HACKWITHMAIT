@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Secure Her</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <!-- Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+      integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+      crossorigin="anonymous"
+    />
+
+    <!-- Google font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Fontawesome -->
+    <script
+      src="https://kit.fontawesome.com/f2c150d561.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <link rel="stylesheet" type="text/css" href="./styles.css" />
+
+    <!-- Leaflet -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+      crossorigin=""
+    />
+    <script
+      defer
+      src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+      integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+      crossorigin=""
+    ></script>
+
+    <!-- Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+      crossorigin="anonymous"
+    ></script>
+
+    <script defer src="./app.js"></script>
+  </head>
+  <body>
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5
+              class="modal-title"
+              id="exampleModalLabel"
+              style="color: rgba(255, 99, 230, 1); font-size: 24px"
+            >
+              <i class="fas fa-shield-alt"></i>&nbsp;Secure<span
+                style="font-weight: 300"
+                >Her</span
+              >
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>
+              Women should never feel alone while walking their way to work,
+              home or a party. In case of some trouble or issue, she would feel
+              secure if her family is always keeping an eye on her location.
+            </p>
+            <img
+              src="./modal-svg.svg"
+              style="
+                height: 160px;
+                width: 320px;
+                display: flex;
+                justify-content: center;
+              "
+            />
+            <h4 style="color: rgba(255, 99, 230, 1)" class="mt-4">
+              In case of emergency,
+            </h4>
+            <h5 style="color: #222" class="mt-2">
+              1. Share your current location
+            </h5>
+            <p>
+              Tap on the "SHARE LOCATION" button, then select contacts from your
+              phonebook with whom you want to share your location. Then, simply
+              send the automatically generated SOS message.
+            </p>
+            <h5 style="color: #222">2. Ring an SOS Alarm</h5>
+            <p>
+              Tap on the "SOS ALERT" button to ring an emergency security alarm.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+              style="
+                background-color: rgba(255, 99, 230, 1) !important;
+                border: none;
+              "
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--The div element for the map -->
+    <audio id="sos-alert">
+      <source src="./sos.mp3" type="audio/mpeg" />
+    </audio>
+
+    <div class="container-fluid">
+      <div class="overlay">
+        <p>This app is only supported by mobile phones. 🙂</p>
+      </div>
+      <div class="header">
+        <div class="row">
+          <h2>
+            <i class="fas fa-shield-alt"></i>&nbsp;Secure<span
+              style="font-weight: 300"
+              >Her</span
+            ><span id="info" style="position: absolute; right: 16px; top: 12px"
+              ><button
+                type="button"
+                class="btn btn-light"
+                data-toggle="modal"
+                data-target="#exampleModal"
+              >
+                <i
+                  class="fas fa-info-circle"
+                  style="color: rgba(255, 99, 230, 1); font-size: 28px"
+                ></i></button
+            ></span>
+          </h2>
+        </div>
+      </div>
+
+      <div class="map-section">
+        <div class="row">
+          <div id="map"></div>
+        </div>
+      </div>
+
+      <div>
+        <img id="marker" src="./navigation.png" alt="" />
+      </div>
+
+      <div class="button-section">
+        <div class="row">
+          <button id="message" class="btn-block" type="button">
+            🗺 Share location
+          </button>
+        </div>
+        <div class="row">
+          <button id="audio" class="btn-block" type="button">
+            🚨 SOS Alert
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
